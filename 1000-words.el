@@ -296,7 +296,7 @@ http://www.edict.biz/lexiconindex/frequencylists/words2000.htm")
 
 (defvar 1000-words-regexp
   (regexp-opt
-   (loop for i from 0 to 999
+   (cl-loop for i from 0 to 999
 	 collect (nth i 2000-most-frequent-words))
    'words)
   "Regular expression matching the 1000 most frequent words
@@ -304,13 +304,13 @@ based on `2000-most-frequent-words'.")
 
 (defvar 2000-words-regexp
   (regexp-opt
-   (loop for i from 1000 to 1999
+   (cl-loop for i from 1000 to 1999
 	 collect (nth i 2000-most-frequent-words))
    'words)
   "Regular expression matching the second thousand most frequent words
 based on `2000-most-frequent-words'.")
 
-(define-derived-mode 2000-words-mode text-mode "2000"
+(define-derived-mode 2000-words-mode org-mode "2000"
   "Major mode for writing text limited to the most common words.
 The words used are in `2000-most-frequent-words'."
   (font-lock-add-keywords nil `((,1000-words-regexp . 'default)
@@ -318,7 +318,7 @@ The words used are in `2000-most-frequent-words'."
 				("\\w+" . 'error)))
   (setq font-lock-keywords-case-fold-search t))
 
-(define-derived-mode 1000-words-mode text-mode "1000"
+(define-derived-mode 1000-words-mode org-mode "1000"
   "Major mode for writing text limited to the most common words.
 The words used are in `1000-most-frequent-words'."
   (font-lock-add-keywords nil `((,1000-words-regexp . 'default)
