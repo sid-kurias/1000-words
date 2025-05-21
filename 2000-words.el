@@ -326,9 +326,11 @@ based on `2000-most-frequent-words'.")
 ;;   (setq font-lock-keywords-case-fold-search t))
 
 (defface common-word-face
-  `((t  :weight light :foreground ,(color-lighten-name (face-foreground 'error) 15)))
+  `((t  ;;:weight light
+     :foreground ,(color-darken-name (face-foreground 'default) 20)))
   "Basic face for frequently used words"
   :group '2000-words)
+
 (define-minor-mode 2000-words-mode
   "Sets up 2000 words mode"
   :global nil
