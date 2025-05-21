@@ -325,6 +325,13 @@ based on `2000-most-frequent-words'.")
 ;; 				("\\w+" . 'error)))
 ;;   (setq font-lock-keywords-case-fold-search t))
 
+(defface common-word-face
+  '((t :height 100
+       :family fixed-pitch-slant
+       :weight normal
+       :underline nil)) 
+  "Face to highlight Common Words"
+  :group '2000-words)
 (define-minor-mode 2000-words-mode
   "Sets up 2000 words mode"
   :global nil
@@ -336,18 +343,17 @@ based on `2000-most-frequent-words'.")
 (defun 2000-words-setup ()
   "Major mode for writing text limited to the most common words.
 The words used are in `2000-most-frequent-words'."
-  (font-lock-add-keywords nil `((,2000-words-regexp . 'default)
-				("\\w+" . 'error)))
+  (font-lock-add-keywords nil `((,2000-words-regexp . 'common-word-face)
+				("\\w+" . 'default)))
   (setq font-lock-keywords-case-fold-search t)
   (font-lock-fontify-buffer))
 (defun 2000-words-pulldown ()
   "Major mode for writing text limited to the most common words.
 The words used are in `2000-most-frequent-words'."
-  ;; (font-lock-remove-keywords nil `((,1000-words-regexp . 'default)
-  ;; 				   (,2000-words-regexp . 'default)
-  ;; 				   ("\\w+" . 'default)))
-  ;; (setq font-lock-keywords-case-fold-search t)
-  (font-lock-refresh-defaults))
+  (font-lock-add-keywords nil `((,2000-words-regexp . 'default)
+				("\\w+" . 'default)))
+  (setq font-lock-keywords-case-fold-search t)
+  (font-lock-fontify-buffer))
 (provide '2000-words)
 
 ;;; 2000-words.el ends here
