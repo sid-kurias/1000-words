@@ -326,11 +326,8 @@ based on `2000-most-frequent-words'.")
 ;;   (setq font-lock-keywords-case-fold-search t))
 
 (defface common-word-face
-  '((t :height 100
-       :family fixed-pitch-slant
-       :weight normal
-       :underline nil)) 
-  "Face to highlight Common Words"
+  `((t  :weight light :foreground ,(color-lighten-name (face-foreground 'error) 15)))
+  "Basic face for frequently used words"
   :group '2000-words)
 (define-minor-mode 2000-words-mode
   "Sets up 2000 words mode"
@@ -343,8 +340,8 @@ based on `2000-most-frequent-words'.")
 (defun 2000-words-setup ()
   "Major mode for writing text limited to the most common words.
 The words used are in `2000-most-frequent-words'."
-  (font-lock-add-keywords nil `((,2000-words-regexp . 'common-word-face)
-				("\\w+" . 'default)))
+  (font-lock-add-keywords nil `((,2000-words-regexp . 'default)
+				("\\w+" . 'common-word-face)))
   (setq font-lock-keywords-case-fold-search t)
   (font-lock-fontify-buffer))
 (defun 2000-words-pulldown ()
